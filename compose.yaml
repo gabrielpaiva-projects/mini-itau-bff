@@ -1,0 +1,9 @@
+version: '3'
+services:
+  app:
+    image: openjdk:21-rc-slim-bookworm
+    volumes:
+      - ./build/libs:/app
+    ports:
+      - "8080:8080"
+    command: ["java", "-jar", "/app/mini-itau-bff-0.0.1-SNAPSHOT.jar"]
