@@ -32,7 +32,7 @@ class AccountController(val provider: AccountServiceProvider) {
             @RequestHeader
             password: String
     ): BackendResponse<*> {
-        val customerAccount =  CustomerAccount(11700.0, 100.0, listOf())
+        val customerAccount =  CustomerAccount(11700.0, 100.0, arrayListOf())
         return provider.createNewUser(
                 Customer(customerAccount,
                         customerDocument,

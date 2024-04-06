@@ -6,6 +6,7 @@ import com.miniitaubff.infra.BackendResponse
 import com.miniitaubff.infra.ErrorResponse
 import com.miniitaubff.model.response.Customer
 import com.miniitaubff.model.response.LoginData
+import com.miniitaubff.model.response.Transaction
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -59,17 +60,30 @@ class TransactionRepository(private val firebaseApp: FirebaseApp) {
         val destinationCustomer = documentReferente.document(destinationCustomerId).get().get().toObject(Customer::class.java)
 
         destinationCustomer?.let {
+
+            var transaction = it.customerAccount.transactions
+            transaction.add(Transaction(currentUserId, amountValue, "RECEIVED", "PIX"))
             documentReferente
                     .document(destinationCustomerId)
-                    .update(mapOf("customerAccount.currentAccountBalance" to it.customerAccount.currentAccountBalance + amountValue))
+                    .update(mapOf(
+                            "customerAccount.currentAccountBalance" to it.customerAccount.currentAccountBalance + amountValue,
+                            "customerAccount.transactions" to  transaction
+                    )
+                    )
         } ?: run {
             return BackendResponse(422, null, ErrorResponse("Erro ao buscar conta."))
         }
 
         currentUser?.let {
+            var transaction = it.customerAccount.transactions
+            transaction.add(Transaction(destinationCustomerId, amountValue, "SENDED", "PIX"))
             documentReferente
                     .document(currentUserId)
-                    .update(mapOf("customerAccount.currentAccountBalance" to it.customerAccount.currentAccountBalance - amountValue))
+                    .update(mapOf(
+                            "customerAccount.currentAccountBalance" to it.customerAccount.currentAccountBalance - amountValue,
+                            "customerAccount.transactions" to transaction
+                    )
+                    )
         } ?: run {
             return BackendResponse(422, null, ErrorResponse("Erro ao buscar conta."))
         }

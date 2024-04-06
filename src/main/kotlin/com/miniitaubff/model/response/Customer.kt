@@ -22,17 +22,17 @@ data class Customer(
 data class CustomerAccount(
         val currentAccountBalance: Double,
         val currentAccountBalanceExtraLimit: Double,
-        val transactions: List<Transactions>
+        val transactions: ArrayList<Transaction>
 ) {
 
-    constructor(): this(0.0, 0.0, listOf())
+    constructor(): this(0.0, 0.0, arrayListOf())
 }
 
-data class Transactions(
+data class Transaction(
+        val receivedCustomerId: String,
         val transactionAmount: Double,
-        val transactionDescription: String,
         val transactionStatus: String,
         val transactionType: String
 ) {
-    constructor(): this(0.0, "", "", "")
+    constructor(): this("", 0.0, "", "")
 }
