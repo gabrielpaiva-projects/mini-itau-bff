@@ -1,4 +1,4 @@
-package com.miniitaubff.model
+package com.miniitaubff.model.response
 
 data class LoginData(
         val accountDigit: Int,

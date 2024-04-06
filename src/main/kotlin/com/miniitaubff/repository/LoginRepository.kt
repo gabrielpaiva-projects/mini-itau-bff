@@ -4,8 +4,8 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.cloud.FirestoreClient
 import com.miniitaubff.infra.BackendResponse
 import com.miniitaubff.infra.ErrorResponse
-import com.miniitaubff.model.Customer
-import com.miniitaubff.model.LoginData
+import com.miniitaubff.model.response.Customer
+import com.miniitaubff.model.response.LoginData
 import org.springframework.stereotype.Repository
 
 @Repository

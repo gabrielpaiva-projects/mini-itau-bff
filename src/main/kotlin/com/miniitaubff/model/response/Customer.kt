@@ -1,12 +1,12 @@
-package com.miniitaubff.model
+package com.miniitaubff.model.response
 
 data class Customer(
-        val customerAccount: CustomerAccount,
+        var customerAccount: CustomerAccount,
         val customerDocument: String,
         val customerMail: String,
         val customerName: String,
         val customerPhoneNumber: String,
-        val customerPhoneNumberAreaCode: String
+        val userId: String
 ) {
 
     constructor() : this(
@@ -15,7 +15,7 @@ data class Customer(
             "",
             "",
             "",
-            ""
+            "",
     )
 }
 
