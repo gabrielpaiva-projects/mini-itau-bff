@@ -8,7 +8,7 @@ WORKDIR /app
 COPY ./build/libs/mini-itau-bff-0.0.1-SNAPSHOT.jar /app/mini-itau.jar
 
 # Exponha a porta 8080 para permitir o acesso ao seu aplicativo
-EXPOSE 8080
+EXPOSE 80
 
 # Comando para executar o aplicativo quando o contêiner for iniciado
 CMD ["java", "-jar", "mini-itau.jar"]
